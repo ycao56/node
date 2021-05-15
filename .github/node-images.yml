@@ -1,0 +1,32 @@
+name: KinD tests
+
+on: push
+  # schedule:
+  # - cron: "0 0 * * *"
+
+defaults:
+  run:
+    shell: bash
+    working-directory: governance-policy-propagator
+
+jobs:
+  node-images-sync:
+    runs-on: ubuntu-latest
+    name: Node Image Sync
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Login to Quay
+      uses: docker/login-action@v1 
+      with:
+        registry: quay.io
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_TOKEN }}
+    
