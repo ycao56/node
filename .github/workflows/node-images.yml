@@ -9,8 +9,8 @@ on:
   pull_request:
     branches:
       - main
-  # schedule:
-  # - cron: "0 0 * * *"
+  schedule:
+  - cron: "0 6 * * *"
 
 jobs:
   build:
@@ -34,9 +34,7 @@ jobs:
         password: ${{ secrets.QUAY_TOKEN }}
     
     - name: Run a multi-line script
-        run: |
-          docker pull node:fermium
-          docker tag node:fermium quay.io/ycao56/node:fermium
-          docker push quay.io/ycao56/node:fermium
-
-    
+      run: |
+        docker pull node:fermium
+        docker tag node:fermium quay.io/ycao56/node:fermium
+        docker push quay.io/ycao56/node:fermium
