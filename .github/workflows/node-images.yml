@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.QUAY_USERNAME }}
         password: ${{ secrets.QUAY_TOKEN }}
     
-    - name: Run a multi-line script
+    - name: Pull, Tag and Push
       run: |
         docker pull node:fermium
         docker tag node:fermium quay.io/ycao56/node:fermium
