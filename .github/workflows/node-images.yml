@@ -12,13 +12,8 @@ on:
   # schedule:
   # - cron: "0 0 * * *"
 
-defaults:
-  run:
-    shell: bash
-    working-directory: governance-policy-propagator
-
 jobs:
-  node-images-sync:
+  build:
     runs-on: ubuntu-latest
     name: Node Image Sync
     steps:
@@ -37,4 +32,11 @@ jobs:
         registry: quay.io
         username: ${{ secrets.QUAY_USERNAME }}
         password: ${{ secrets.QUAY_TOKEN }}
+    
+    - name: Run a multi-line script
+        run: |
+          docker pull node:fermium
+          docker tag node:fermium quay.io/ycao56/node:fermium
+          docker push quay.io/ycao56/node:fermium
+
     
